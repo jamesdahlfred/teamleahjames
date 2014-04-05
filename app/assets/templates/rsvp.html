@@ -1,0 +1,28 @@
+<div class="container">
+  <h2 id="rsvp"><span class="sr-only">R.S.V.P.</span></h2>
+</div>
+
+<div class="container well">
+  <form name="rsvpForm" ng-controller="RsvpController" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="rsvpCode">Your RSVP Code</label>
+          <input class="form-control" name="rsvpCode" type="text" ng-model="rsvp.code" size="6" required />
+          <span class="help-block" ng-show="help">{{ help }}</span>
+          <span class="text-danger" ng-show="danger">{{ danger }}</span>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-small btn-primary" ng-disabled="rsvpForm.$invalid || isUnchanged(rsvp.code)" type="submit" value="Submit" ng-click="checkCode()" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Little Help, Please!</label>
+          <p>If you lost your invite (tsk, tsk) or you never got one (but you&#8217;re sure you were supposed to), get in touch and we&#8217;ll sort you out.</p>
+          <a href="mailto:teamleahjames@gmail.com?subject=What's My RSVP Code?" class="btn btn-small btn-default">What&#8217;s My RSVP Code?</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

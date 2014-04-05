@@ -1,0 +1,146 @@
+<div class="container">
+  <h2 id="rsvp"><span class="sr-only">R.S.V.P.</span></h2>
+</div>
+
+<div class="container well">
+  <form name="rsvpForm" ng-controller="RsvpController" novalidate>
+    <p class="bg-warning" ng-show="message">{{ message }}</p>
+    
+    <div class="form-group">
+      <h3>Will You Attend?</h3>
+      <label class="checkbox-inline">
+        <input type="radio" name="attending" value="1joy" ng-model="rsvp.attending" ng-required="true"> Yes, I accept with pleasure!
+      </label>
+      <label class="checkbox-inline">
+        <input type="radio" name="attending" value="1regret" ng-model="rsvp.attending" ng-required="true"> Yes, I accept with regret :/
+      </label>
+      <label class="checkbox-inline">
+        <input type="radio" name="attending" value="0regret" ng-model="rsvp.attending" ng-required="true"> No, I decline with regret :(
+      </label>
+      <label class="checkbox-inline">
+        <input type="radio" name="attending" value="0joy" ng-model="rsvp.attending" ng-required="true"> No, I decline with pleasure :p
+      </label>
+    </div>
+
+    <div ng-show="rsvp.attending=='0joy' || rsvp.attending=='0regret'">
+      <div class="form-group">
+        <input class="btn btn-small btn-primary" type="submit" value="Respond" ng-click="respond()" />
+      </div>
+    </div>
+
+    <div ng-show="rsvp.attending=='1joy' || rsvp.attending=='1regret'">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form-group">
+            <h3>You</h3>
+            <div class="row">
+              <div class="col-xs-4">
+                <input type="text" name="guest_first" class="form-control" ng-model="rsvp.guest.first" ng-required="true" placeholder="First" />
+              </div>
+              <div class="col-xs-4">
+                <input type="text" name="guest_last" class="form-control" ng-model="rsvp.guest.last" ng-required="true" placeholder="Last" />
+              </div>
+              <label class="checkbox-inline">
+                <input type="radio" name="your_meal" value="S" ng-model="rsvp.guest.meal" ng-required="true"> Standard clambake fare
+              </label>
+              <label class="checkbox-inline">
+                <input type="radio" name="your_meal" value="V" ng-model="rsvp.guest.meal" ng-required="true"> Vegetarian
+              </label>
+            </div>
+          </div>
+
+          <div ng-show="rsvp.allow_plusone!='1'">
+            <p><span class="help-block">Maybe this is awkward, but we didn't give you a plus one. We simply can't invite everybody we'd like to. Please don't be hurt and come anyway! But let us know if we're egregiously wrong and your significant other makes the sun shine for you - we want all the sunshine we can get.</span></p>
+          </div>
+        
+          <div ng-show="rsvp.allow_plusone=='1'">
+            <div class="form-group">
+              <h3 for="first_name">Your Plus One</h3>
+              <div class="row">
+                <div class="col-xs-4">
+                  <input type="text" name="plusone_first" class="form-control" ng-model="rsvp.plusone.first" ng-required="false" placeholder="First" />
+                </div>
+                <div class="col-xs-4">
+                  <input type="text" name="plusone_last" class="form-control" ng-model="rsvp.plusone.last" ng-required="false" placeholder="Last" />
+                </div>
+                <label class="checkbox-inline">
+                  <input type="radio" name="plusone_meal" value="S" ng-model="rsvp.plusone.meal" ng-required="false"> Standard clambake fare
+                </label>
+                <label class="checkbox-inline">
+                  <input type="radio" name="plusone_meal" value="V" ng-model="rsvp.plusone.meal" ng-required="false"> Vegetarian
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div ng-show="rsvp.allow_children=='1'">
+            <h3>Children</h3>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-2">
+                  <select class="form-control" ng-required="true" ng-model="rsvp.children" ng-options="n for n in [0, 1, 2, 3, 4, 5]">
+                    <option ng-repeat="n in [0, 1, 2, 3, 4, 5]" value="{{ $index }}">{{ $index }}</option>
+                  </select>
+                </div>
+                <div class="col-xs-10">
+                  <span class="help-block">child(ren) requiring a kid&#8217;s meal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h3>Appetizer</h3>
+            <span class="help-block">Can you bring your favorite homemade family-style (or Trader Joe's freezer aisle) appetizer for the cocktail hour? There's no refrigeration or cooking available on-site, so we're talking to those of you who aren't travelling a great distance, or any enterprising souls with a kitchen in their hotel room.</span>
+            <label class="checkbox-inline">
+              <input type="radio" name="appetizer" value="1" ng-model="rsvp.appetizer" ng-required="true"> Yes &nbsp;
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio" name="appetizer" value="0" ng-model="rsvp.appetizer" ng-required="true"> No &nbsp;
+            </label>
+          </div>
+
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <h3>Your Preferred Contact Information</h3>
+            <span class="help-block">We need a reliable way to let you know if something big changes. Remember that wedding where it blizzarded and the governor closed all the roads and the wedding had to be put off a day? We don't expect snow in June, but who knows, this is New England.</span>
+            <label for="address">Mailing Address</label>
+            <textarea class="form-control" name="address" ng-model="rsvp.address" ng-required="true" rows="3">{{ rsvp.address }}</textarea>
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" ng-model="rsvp.email" ng-required="true" placeholder="Email" />
+              </div>
+              <div class="col-sm-6">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" ng-model="rsvp.phone" ng-required="true" placeholder="Phone" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <h3>Special Considerations?</h3>
+            <textarea class="form-control" name="note" ng-model="rsvp.note" ng-required="false" rows="3">{{ rsvp.note }}</textarea>
+          </div>          
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3>Reminder!</h3>
+        <div class="callout">
+          <p>This is an outdoor event; we will wed, rain or shine! If it looks cloudy, please bring an umbrella.<br />There is a covered pavillion where we'll be dining and dancing.</p>
+          <p>Entertainment provided will include good music, watching the ruckus, and many lawn-type activities.</p>
+          <p>There are things that live outdoors which may also be in attendance: rays of warm or burning sunshine, cold, rain that is frequently wet, creepy crawlers and even possibly biters. We are told there is a low likelihood of bears and the zombie index for June is sufficiently low.</p>
+          <p>Please plan and dress accordingly.</p>
+        </div>
+        <p>
+          <br />
+          <input class="btn btn-small btn-primary" ng-disabled="rsvpForm.$invalid || isUnchanged(rsvpCode)" type="submit" value="Respond" ng-click="respond()" /> &nbsp;
+          <span class="text-success" ng-show="success">{{ success }}</span>
+          <span class="text-danger" ng-show="danger">{{ danger }}</span>
+        </p>
+      </div>
+    </div>
+
+  </form>
+</div>

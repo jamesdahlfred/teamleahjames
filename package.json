@@ -1,0 +1,35 @@
+{
+  "name": "teamleahjames",
+  "version": "0.0.0",
+  "description": "One-page web app using Grunt, Laravel, AngularJS, and Bootstrap",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamesdahlfred/teamleahjames.git"
+  },
+  "keywords": [
+    "Laravel",
+    "Grunt",
+    "AngularJS",
+    "Bootstrap",
+    "Markdown"
+  ],
+  "author": "James Dahlfred",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamesdahlfred/teamleahjames/issues"
+  },
+  "homepage": "https://github.com/jamesdahlfred/teamleahjames",
+  "devDependencies": {
+    "grunt": "^0.4.2",
+    "grunt-contrib-concat": "^0.3.0",
+    "grunt-contrib-less": "^0.9.0",
+    "grunt-contrib-uglify": "^0.3.2",
+    "grunt-contrib-watch": "^0.5.3",
+    "grunt-phpunit": "^0.3.3",
+    "grunt-contrib-copy": "^0.5.0"
+  }
+}
