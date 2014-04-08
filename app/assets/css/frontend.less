@@ -76,6 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 #nav-ceremony a    { background: transparent url("/assets/images/nav-ceremony.png")    0 50% no-repeat; width: 168px; }
 #nav-rsvp a        { background: transparent url("/assets/images/nav-rsvp.png")        0 50% no-repeat; width: 110px; }
 #nav-reception a   { background: transparent url("/assets/images/nav-reception.png")   0 50% no-repeat; width: 134px; }
+#nav-gifts a       { background: transparent url("/assets/images/nav-gifts.png")       0 50% no-repeat; width: 0px; }
 #nav-travel a      { background: transparent url("/assets/images/nav-travel.png")      0 50% no-repeat; width: 172px; }
 
 #flowers {
@@ -85,33 +86,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 53px;
 }
 #ico {
-  position: absolute;
-  width: 100%;
   display: none;
-}
-#ico-shortsweet,
-#ico-bridalparty,
-#ico-ceremony,
-#ico-rsvp,
-#ico-reception,
-#ico-travel {
-  position: absolute;
-  top: 0;
-}
-#ico a {
-  display: block;
-  background-color: #9ebde3;
-  background-position: 0 0;
-  background-repeat: no-repeat;
 }
 
 h2 { width: 100%; height: 98px; }
 
 #bridalparty { background: transparent url("/assets/images/bridalparty.png") 50% 0 no-repeat; }
 #ceremony    { background: transparent url("/assets/images/ceremony.png")    50% 0 no-repeat; }
-#reception   { background: transparent url("/assets/images/reception.png")   50% 0 no-repeat; }
-#travel      { background: transparent url("/assets/images/travel.png")      50% 0 no-repeat; }
 #rsvp        { background: transparent url("/assets/images/rsvp.png")        50% 0 no-repeat; }
+#reception   { background: transparent url("/assets/images/reception.png")   50% 0 no-repeat; }
+#gifts       { background: transparent url("/assets/images/gifts.png")       50% 0 no-repeat; }
+#travel      { background: transparent url("/assets/images/travel.png")      50% 0 no-repeat; }
 
 .reveal-animation.ng-enter {
   -webkit-transition: 1s linear all; /* Safari/Chrome */
@@ -139,8 +124,13 @@ hr {
 }
 
 address .dl-horizontal dt {
+  float: left;
   width: 22px;
+  clear: left;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 address .dl-horizontal dd {
   margin-left: 22px;
@@ -172,25 +162,27 @@ address .dl-horizontal dd {
   }
   #ico {
     display: block;
-    background: #9ebde3 url("/assets/images/768/ico-bg.png") 0 0 repeat-x;
+    position: absolute;
+    width: 100%;
     top: 168px;
     height: 75px;
+    background-image: url("/assets/images/768/ico-bg.png");
+    padding-left: 10px;
   }
-  #ico a {
-    height: 75px;
+  #ico > li > a {
+    height: 100px;
+    background-color: #9ebde3;
+    background-image: url("/assets/images/768/ico.png");
+    background-size: 748px 75px;
   }
-  #ico-shortsweet  { left: 10px; }
-  #ico-bridalparty { left: 128px; }
-  #ico-ceremony    { left: 240px; }
-  #ico-rsvp        { left: 401px; }
-  #ico-reception   { left: 508px; }
-  #ico-travel      { left: 641px; }
-  #ico-shortsweet a  { background-image: url("/assets/images/768/ico-shortsweet.png");  width: 89px; }
-  #ico-bridalparty a { background-image: url("/assets/images/768/ico-bridalparty.png"); width: 86px; }
-  #ico-ceremony a    { background-image: url("/assets/images/768/ico-ceremony.png");    width: 133px; }
-  #ico-rsvp a        { background-image: url("/assets/images/768/ico-rsvp.png");        width: 79px; }
-  #ico-reception a   { background-image: url("/assets/images/768/ico-reception.png");   width: 104px; }
-  #ico-travel a      { background-image: url("/assets/images/768/ico-travel.png");      width: 99px; }
+  #ico-shortsweet a  { background-position:    0px 0; width: 114px; }
+  #ico-bridalparty a { background-position: -114px 0; width: 111px; }
+  #ico-ceremony a    { background-position: -225px 0; width: 172px; }
+  #ico-rsvp a        { background-position: -397px 0; width: 101px; }
+  #ico-reception a   { background-position: -498px 0; width: 133px; }
+  #ico-gifts a       { background-position: -631px 0; width: 102px; }
+  #ico-travel a      { background-position: -733px 0; width: 129px; }
+  #ico-contact a     { background-position: -862px 0; width:  85px; }
   #details {
     background-image: url("/assets/images/768/details.png");
     height: 442px;
@@ -210,23 +202,23 @@ address .dl-horizontal dd {
     height: 313px;
   }
   #ico {
-    background-image: url("/assets/images/992/ico-bg.png");
     top: 193px;
     height: 100px;
+    background-image: url("/assets/images/992/ico-bg.png");
   }
-  #ico a { height: 100px; }
-  #ico-shortsweet  { left: 10px; }
-  #ico-bridalparty { left: 162px; }
-  #ico-ceremony    { left: 311px; }
-  #ico-rsvp        { left: 521px; }
-  #ico-reception   { left: 660px; }
-  #ico-travel      { left: 833px; }
-  #ico-shortsweet a  { background-image: url("/assets/images/992/ico-shortsweet.png"); width: 114px; }
-  #ico-bridalparty a { background-image: url("/assets/images/992/ico-bridalparty.png"); width: 111px; }
-  #ico-ceremony a    { background-image: url("/assets/images/992/ico-ceremony.png"); width: 172px; }
-  #ico-rsvp a        { background-image: url("/assets/images/992/ico-rsvp.png"); width: 101px; }
-  #ico-reception a   { background-image: url("/assets/images/992/ico-reception.png"); width: 133px; }
-  #ico-travel a      { background-image: url("/assets/images/992/ico-travel.png"); width: 129px; }
+  #ico > li > a {
+    height: 100px;
+    background-image: url("/assets/images/992/ico.png");
+    background-size: 1081px 100px;
+  }
+  #ico-shortsweet a  { background-position:    0px 0; width: 114px; }
+  #ico-bridalparty a { background-position: -114px 0; width: 111px; }
+  #ico-ceremony a    { background-position: -225px 0; width: 172px; }
+  #ico-rsvp a        { background-position: -397px 0; width: 101px; }
+  #ico-reception a   { background-position: -498px 0; width: 133px; }
+  #ico-gifts a       { background-position: -631px 0; width: 102px; }
+  #ico-travel a      { background-position: -733px 0; width: 129px; }
+  #ico-contact a     { background-position: -862px 0; width:  85px; }
   #details {
     background-image: url("/assets/images/992/details.png");
     height: 442px;
@@ -242,11 +234,81 @@ address .dl-horizontal dd {
   }
   #ico {
     top: 240px;
+    height: 100px;
+    background-image: url("/assets/images/1200/ico-bg.png");
   }
-  #ico-shortsweet  { left: 50px; }
-  #ico-bridalparty { left: 223px; }
-  #ico-ceremony    { left: 383px; }
-  #ico-rsvp        { left: 620px; }
-  #ico-reception   { left: 779px; }
-  #ico-travel      { left: 967px; }
+  #ico > li:first {
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
+  body {
+    background-image: url("/assets/images/topfade@2x.png");
+    background-size: 10px 115px;
+  }
+  .navbar-brand {
+    background-image: url("/assets/images/nav-names@2x.png");
+    background-size: 113px 21px;
+  }
+  #nav-bridalparty a {
+    background-image: url("/assets/images/nav-bridalparty@2x.png");
+    background-size: 156px 23px;
+  }
+  #nav-ceremony a {
+    background-image: url("/assets/images/nav-ceremony@2x.png");
+    background-size: 168px 23px;
+  }
+  #nav-rsvp a {
+    background-image: url("/assets/images/nav-rsvp@2x.png");
+    background-size: 110px 23px;
+  }
+  #nav-reception a {
+    background-image: url("/assets/images/nav-reception@2x.png");
+    background-size: 134px 23px;
+  }
+  #nav-travel a {
+    background-image: url("/assets/images/nav-travel@2x.png");
+    background-size: 172px 23px;
+  }
+  #nav-contact a {
+    background-image: url("/assets/images/nav-contact@2x.png");
+    background-size: 172px 23px;
+  }
+  #flowers {
+    background-image: url("/assets/images/flowers@2x.png");
+    background-size: 300px 115px;
+  }
+  #bridalparty {
+    background-image: url("/assets/images/bridalparty@2x.png");
+    background-size: 295px 98px;
+  }
+  #ceremony {
+    background-image: url("/assets/images/ceremony@2x.png");
+    background-size: 162px 98px;
+  }
+  #reception {
+    background-image: url("/assets/images/reception@2x.png");
+    background-size: 180px 98px;
+  }
+  #gifts {
+    background-image: url("/assets/images/gifts@2x.png");
+    background-size: 112px 98px;
+  }
+  #travel {
+    background-image: url("/assets/images/travel@2x.png");
+    background-size: 213px 98px;
+  }
+  #rsvp {
+    background-image: url("/assets/images/rsvp@2x.png");
+    background-size: 251px 98px;
+  }
+  #details {
+    background-image: url("/assets/images/details@2x.png");
+    background-size: 300px 600px;
+  }
+  hr {
+    background-image: url("/assets/images/horzrule@2x.png");
+    background-size: 1140px 60px;
+  }
 }

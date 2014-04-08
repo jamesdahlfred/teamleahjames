@@ -28,6 +28,9 @@ app.config(function($routeProvider) {
     .when('/reception', {
       templateUrl: '/assets/templates/reception.html'
     })
+    .when('/gifts', {
+      templateUrl: '/assets/templates/gifts.html'
+    })
     .when('/travel', {
       templateUrl: '/assets/templates/travel.html'
     })
