@@ -11,7 +11,7 @@ class GuestsTableSeeder extends Seeder {
         'code'           => 'DISHANDDRINK',
         'list'           => 'A',
         'attending'      => true,
-        'emotion'        => 'joy',
+        'emotion'        => 'pleasure',
         'allow_plusone'  => true,
         'allow_children' => true,
         'guest'          => json_encode(array('first' => 'James', 'last' => 'Dahlfred', 'meal' => 'S')),

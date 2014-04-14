@@ -45,14 +45,14 @@
   <div class="container" id="flowers">
     <span class="sr-only">Eat, Drink, And Be Married</span>
     <ul class="nav nav-justified" id="ico">
-      <li id="ico-shortsweet"><a href="/#/details"><span class="sr-only">The Short &amp; Sweet Version</span></a></li>
+      <li id="ico-shortsweet"><a href="/#/"><span class="sr-only">The Short &amp; Sweet Version</span></a></li>
       <li id="ico-bridalparty"><a href="/#/bridalparty"><span class="sr-only">Bridal Party</span></a></li>
       <li id="ico-ceremony"><a href="/#/ceremony"><span class="sr-only">Ceremony</span></a></li>
       <li id="ico-rsvp"><a href="/#/rsvp"><span class="sr-only">R.S.V.P.</span></a></li>
       <li id="ico-reception"><a href="/#/reception"><span class="sr-only">Reception</span></a></li>
       <li id="ico-gifts"><a href="/#/gifts"><span class="sr-only">Gifts</span></a></li>
       <li id="ico-travel"><a href="/#/travel"><span class="sr-only">Travel Info</span></a></li>
-      <li id="ico-contact"><a href="/#/contact"><span class="sr-only">Get In Touch</span></a></li>
+      <li id="ico-contact"><a href="mailto:teamleahjames@gmail.com?subject=Yo Guys!"><span class="sr-only">Get In Touch</span></a></li>
     </ul>
   </div>
 
