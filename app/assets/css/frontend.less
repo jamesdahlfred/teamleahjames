@@ -1,0 +1,414 @@
+// Twitter Bootstrap
+@import "../../../bower_components/bootstrap/less/bootstrap.less";
+
+// Google Fonts
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic|Lobster);
+
+// Sitewide Styles
+@import "app.less";
+
+#flowers {
+  position: relative;
+  background: transparent url("/assets/images/320/flowers.png") 50% 0 no-repeat;
+  height: 115px;
+  margin-top: 53px;
+}
+#ico {
+  display: none;
+}
+h2 {
+  width: 100%; height: 98px;
+}
+#bridalparty { background: transparent url("/assets/images/h2-bridalparty.png") 50% 0 no-repeat; }
+#ceremony    { background: transparent url("/assets/images/h2-ceremony.png")    50% 0 no-repeat; }
+#reception   { background: transparent url("/assets/images/h2-reception.png")   50% 0 no-repeat; }
+#rsvp        { background: transparent url("/assets/images/h2-rsvp.png")        50% 0 no-repeat; }
+#travel      { background: transparent url("/assets/images/h2-travel.png")      50% 0 no-repeat; }
+#gifts       { background: transparent url("/assets/images/h2-gifts.png")       50% 0 no-repeat; }
+#contact     { background: transparent url("/assets/images/h2-contact.png")     50% 0 no-repeat; }
+
+#details {
+  background: transparent url("/assets/images/320/details.png") 50% 0 no-repeat;
+  height: 600px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+address .dl-horizontal dt {
+  float: left;
+  width: 22px;
+  clear: left;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+address .dl-horizontal dd {
+  margin-left: 22px;
+}
+
+.callout {
+  background-color: #fff3cc;
+  padding: 10px;
+  /*padding-left: 15px;*/
+  /*border-left: 3px solid #d4b072;*/
+}
+
+.glyphicon-hand-right {
+  color: #f00;
+}
+
+@media
+  only screen and (-moz-min-device-pixel-ratio: 1.5),
+  only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5),
+  only screen and (min-resolution: 1.5dppx)
+{
+  body {
+    background-image: url("/assets/images/320/topfade@2x.png");
+    background-size: 10px 115px;
+  }
+  .navbar-brand {
+    background-image: url("/assets/images/nav-names@2x.png");
+    background-size: 113px 21px;
+  }
+  #nav-bridalparty a {
+    background-image: url("/assets/images/nav-bridalparty@2x.png");
+    background-size: 156px 23px;
+  }
+  #nav-ceremony a {
+    background-image: url("/assets/images/nav-ceremony@2x.png");
+    background-size: 168px 23px;
+  }
+  #nav-rsvp a {
+    background-image: url("/assets/images/nav-rsvp@2x.png");
+    background-size: 110px 23px;
+  }
+  #nav-reception a {
+    background-image: url("/assets/images/nav-reception@2x.png");
+    background-size: 134px 23px;
+  }
+  #nav-travel a {
+    background-image: url("/assets/images/nav-travel@2x.png");
+    background-size: 172px 23px;
+  }
+  #nav-gifts a {
+    background-image: url("/assets/images/nav-gifts@2x.png");
+    background-size: 78px 23px;
+  }
+  #nav-contact a {
+    background-image: url("/assets/images/nav-contact@2x.png");
+    background-size: 172px 23px;
+  }
+  #flowers {
+    background-image: url("/assets/images/320/flowers@2x.png");
+    background-size: 300px 115px;
+  }
+  #details {
+    background-image: url("/assets/images/320/details@2x.png");
+    background-size: 300px 600px;
+  }
+  #bridalparty {
+    background-image: url("/assets/images/h2-bridalparty@2x.png");
+    background-size: 295px 98px;
+  }
+  #ceremony {
+    background-image: url("/assets/images/h2-ceremony@2x.png");
+    background-size: 162px 98px;
+  }
+  #reception {
+    background-image: url("/assets/images/h2-reception@2x.png");
+    background-size: 180px 98px;
+  }
+  #rsvp {
+    background-image: url("/assets/images/h2-rsvp@2x.png");
+    background-size: 251px 98px;
+  }
+  #travel {
+    background-image: url("/assets/images/h2-travel@2x.png");
+    background-size: 213px 98px;
+  }
+  #gifts {
+    background-image: url("/assets/images/h2-gifts@2x.png");
+    background-size: 112px 98px;
+  }
+  #contact {
+    background-image: url("/assets/images/h2-contact@2x.png");
+    background-size: 0px 98px;
+  }
+  hr {
+    background-image: url("/assets/images/horzrule@2x.png");
+    background-size: 1140px 60px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url("/assets/images/768/topfade.png");
+  }
+  .navbar.affix-top {
+    top: -54px;
+  }
+  #nav-bridalparty a { width: 117px; background-position: -39px 50%; }
+  #nav-ceremony a    { width:  93px; background-position: -75px 50%; }
+  #nav-reception a   { width:  92px; background-position: -42px 50%; }
+  #nav-rsvp a        { width:  54px; background-position: -56px 50%; }
+  #nav-travel a      { width: 106px; background-position: -66px 50%; }
+  #nav-gifts a       { width:  47px; background-position: -31px 50%; }
+  #nav-contact a     { width:   0px; background-position:  -0px 50%; }
+  #flowers {
+    background-image: url("/assets/images/768/flowers.png");
+    height: 243px;
+    margin-top: 0;
+  }
+  #ico {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 168px;
+    height: 73px;
+    background-image: url("/assets/images/768/ico-bg.png");
+  }
+  #ico > li > a {
+    height: 73px;
+    background-color: #9ebde3;
+    background-image: url("/assets/images/768/ico.png");
+    background-size: 701px 73px;
+  }
+  #ico-shortsweet a  { background-position:    0px 0; width:  85px; }
+  #ico-bridalparty a { background-position:  -85px 0; width:  81px; }
+  #ico-ceremony a    { background-position: -166px 0; width: 128px; }
+  #ico-reception a   { background-position: -369px 0; width:  99px; }
+  #ico-rsvp a        { background-position: -294px 0; width:  74px; }
+  #ico-travel a      { background-position: -542px 0; width:  95px; }
+  #ico-gifts a       { background-position: -467px 0; width:  75px; }
+  #ico-contact a     { background-position: -637px 0; width:  64px; }
+  #details {
+    background-image: url("/assets/images/768/details.png");
+    height: 442px;
+  }
+  .container.welltop {
+    height: 35px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    background: transparent url("/assets/images/768/wellhead.png") 50% 0 no-repeat;
+  }
+  .container.well {
+    border: none;
+    margin-bottom: 0;
+    padding-top: 22px;
+    background: #fff url("/assets/images/768/wellbodytop.png") 50% 0 no-repeat;
+  }
+  .container.wellfoot {
+    height: auto;
+    margin-top: 0;
+    padding-top: 44px;
+    background: transparent url("/assets/images/768/wellfoot.png") 50% 0 no-repeat;
+  }
+}
+@media
+  only screen and (-moz-min-device-pixel-ratio: 1.5) and (min-width: 768px),
+  only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 768px),
+  only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 768px),
+  only screen and (min-device-pixel-ratio: 1.5) and (min-width: 768px),
+  only screen and (min-resolution: 1.5dppx) and (min-width: 768px)
+{
+  body {
+    background-image: url("/assets/images/768/topfade@2x.png");
+    background-size: 10px 148px;
+  }
+  #flowers {
+    background-image: url("/assets/images/768/flowers@2x.png");
+    background-size: 748px 148px;
+  }
+  #ico {
+    background-image: url("/assets/images/768/ico-bg@2x.png");
+    background-size: 10px 73px;
+  }
+  #ico > li > a {
+    background-image: url("/assets/images/768/ico@2x.png");
+    background-size: 701px 73px;
+  }
+  #details {
+    background-image: url("/assets/images/768/details@2x.png");
+    background-size: 748px 442px;
+  }
+  .container.welltop {
+    background-image: url("/assets/images/768/wellhead.png");
+    background-size: 720px 35px;
+  }
+  .container.well {
+    background-image: url("/assets/images/768/wellbodytop.png");
+    background-size: 720px 42px;
+  }
+  .container.wellfoot {
+    background-image: url("/assets/images/768/wellfoot.png");
+    background-size: 720px 34px;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    background-image: url("/assets/images/992/topfade.png");
+  }
+  #flowers {
+    background-image: url("/assets/images/992/flowers.png");
+    height: 313px;
+  }
+  #ico {
+    top: 193px;
+    height: 100px;
+    background-image: url("/assets/images/992/ico-bg.png");
+  }
+  #ico > li > a {
+    height: 100px;
+    background-image: url("/assets/images/992/ico.png");
+    background-size: 1081px 100px;
+  }
+  #ico-shortsweet a  { background-position:    0px 0; width: 114px; }
+  #ico-bridalparty a { background-position: -114px 0; width: 111px; }
+  #ico-ceremony a    { background-position: -225px 0; width: 172px; }
+  #ico-reception a   { background-position: -498px 0; width: 133px; }
+  #ico-rsvp a        { background-position: -397px 0; width: 101px; }
+  #ico-travel a      { background-position: -732px 0; width: 130px; }
+  #ico-gifts a       { background-position: -631px 0; width: 102px; }
+  #ico-contact a     { background-position: -862px 0; width:  85px; }
+  #details {
+    background-image: url("/assets/images/992/details.png");
+    height: 442px;
+  }
+  .container.welltop {
+    height: 52px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    background: transparent url("/assets/images/992/wellhead.png") 50% 0 no-repeat;
+  }
+  .container.well {
+    border: none;
+    margin-bottom: 0;
+    padding-top: 24px;
+    background: #fff url("/assets/images/992/wellbodytop.png") 50% 0 no-repeat;
+  }
+  .container.wellfoot {
+    height: auto;
+    margin-top: 0;
+    padding-top: 62px;
+    background: transparent url("/assets/images/992/wellfoot.png") 50% 0 no-repeat;
+  }
+}
+
+@media
+  only screen and (-moz-min-device-pixel-ratio: 1.5) and (min-width: 992px),
+  only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 992px),
+  only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 992px),
+  only screen and (min-device-pixel-ratio: 1.5) and (min-width: 992px),
+  only screen and (min-resolution: 1.5dppx) and (min-width: 992px)
+{
+  body {
+    background-image: url("/assets/images/992/topfade@2x.png");
+    background-size: 10px 193px;
+  }
+  #flowers {
+    background-image: url("/assets/images/992/flowers@2x.png");
+    background-size: 972px 193px;
+  }
+  #ico {
+    background-image: url("/assets/images/992/ico-bg@2x.png");
+    background-size: 10px 100px;
+  }
+  #ico > li > a {
+    background-image: url("/assets/images/992/ico@2x.png");
+    background-size: 1081px 100px;
+  }
+  #details {
+    background-image: url("/assets/images/992/details@2x.png");
+    background-size: 945px 442px;
+  }
+  .container.welltop {
+    background-image: url("/assets/images/992/wellhead.png");
+    background-size: 930px 52px;
+  }
+  .container.well {
+    background-image: url("/assets/images/992/wellbodytop.png");
+    background-size: 930px 44px;
+  }
+  .container.wellfoot {
+    background-image: url("/assets/images/992/wellfoot.png");
+    background-size: 930px 52px;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    background-image: url("/assets/images/1200/topfade.png");
+  }
+  #flowers {
+    background-image: url("/assets/images/1200/flowers.png");
+    height: 340px;
+  }
+  #nav-bridalparty a { width: 156px; background-position: 0 50%; }
+  #nav-ceremony a    { width: 168px; background-position: 0 50%; }
+  #nav-reception a   { width: 134px; background-position: 0 50%; }
+  #nav-rsvp a        { width: 110px; background-position: 0 50%; }
+  #nav-travel a      { width: 172px; background-position: 0 50%; }
+  #nav-gifts a       { width:  78px; background-position: 0 50%; }
+  #nav-contact a     { width:   0px; background-position: 0 50%; }
+  #ico {
+    top: 240px;
+  }
+  #ico > li:first {
+    margin-left: 15px;
+  }
+  .container.welltop {
+    height: 70px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    background: transparent url("/assets/images/1200/wellhead.png") 50% 0 no-repeat;
+  }
+  .container.well {
+    border: none;
+    margin-bottom: 0;
+    padding-top: 31px;
+    background: #fff url("/assets/images/1200/wellbodytop.png") 50% 0 no-repeat;
+  }
+  .container.wellfoot {
+    height: auto;
+    margin-top: 0;
+    padding-top: 80px;
+    background: transparent url("/assets/images/1200/wellfoot.png") 50% 0 no-repeat;
+  }
+}
+
+@media
+  only screen and (-moz-min-device-pixel-ratio: 1.5) and (min-width: 1200px),
+  only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 1200px),
+  only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 1200px),
+  only screen and (min-device-pixel-ratio: 1.5) and (min-width: 1200px),
+  only screen and (min-resolution: 1.5dppx) and (min-width: 1200px)
+{
+  body {
+    background-image: url("/assets/images/1200/topfade@2x.png");
+    background-size: 20px 220px;
+  }
+  #flowers {
+    background-image: url("/assets/images/1200/flowers@2x.png");
+    background-size: 1140px 220px;
+  }
+  .container.welltop {
+    background-image: url("/assets/images/1200/wellhead.png");
+    background-size: 1140px 70px;
+  }
+  .container.well {
+    background-image: url("/assets/images/1200/wellbodytop.png");
+    background-size: 1140px 51px;
+  }
+  .container.wellfoot {
+    background-image: url("/assets/images/1200/wellfoot.png");
+    background-size: 1140px 70px;
+  }
+}
