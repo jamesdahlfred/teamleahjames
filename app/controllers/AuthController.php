@@ -6,17 +6,9 @@ class AuthController extends BaseController {
     return Response::json(Auth::check());
   }
 
-  public function secrets() {
-    if(Auth::check()) {
-      return 'You are logged in, here are secrets.';
-    } else {
-      return 'You aint logged in, no secrets for you.';
-    }
-  }
-
   public function login()
   {
-    if(Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password'))))
+    if (Auth::attempt(array('email' => Input::json('email'), 'password' => Input::json('password')), true))
     {
       return Response::json(Auth::user());
     } else {

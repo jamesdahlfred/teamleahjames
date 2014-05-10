@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="app">
+<html lang="en" id="ng-app" ng-app="app" xmlns:ng="http://angularjs.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,7 @@
     angular.module("app").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
   </script>
 </head>
-<body data-spy="scroll" data-target=".navbar">
+<body>
 
   <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="navbar-header">
@@ -33,11 +33,11 @@
       <ul class="nav navbar-nav">
         <li id="nav-bridalparty"><a href="/#/bridalparty"><span class="sr-only">Bridal Party</span></a></li>
         <li id="nav-ceremony"><a href="/#/ceremony"><span class="sr-only">Ceremony</span></a></li>
-        <li id="nav-rsvp"><a href="#rsvp"><span class="sr-only">R.S.V.P.</span></a></li>
         <li id="nav-reception"><a href="/#/reception"><span class="sr-only">Reception</span></a></li>
-        <li id="nav-gifts"><a href="/#/gifts"><span class="sr-only">Gifts</span></a></li>
+        <li id="nav-rsvp"><a href="/#/rsvp"><span class="sr-only">R.S.V.P.</span></a></li>
         <li id="nav-travel"><a href="/#/travel"><span class="sr-only">Travel Info</span></a></li>
-        <li id="nav-contact"><a href="/#/contact"><span class="sr-only">Get In Touch</span></a></li>
+        <li id="nav-gifts"><a href="/#/gifts"><span class="sr-only">Gifts</span></a></li>
+        <li id="nav-contact"><a href="#contactFormModal" data-toggle="modal" data-target="contactFormModal"><span class="sr-only">Get In Touch</span></a></li>
       </ul>
     </div>
   </nav>
@@ -48,15 +48,48 @@
       <li id="ico-shortsweet"><a href="/#/"><span class="sr-only">The Short &amp; Sweet Version</span></a></li>
       <li id="ico-bridalparty"><a href="/#/bridalparty"><span class="sr-only">Bridal Party</span></a></li>
       <li id="ico-ceremony"><a href="/#/ceremony"><span class="sr-only">Ceremony</span></a></li>
-      <li id="ico-rsvp"><a href="/#/rsvp"><span class="sr-only">R.S.V.P.</span></a></li>
       <li id="ico-reception"><a href="/#/reception"><span class="sr-only">Reception</span></a></li>
-      <li id="ico-gifts"><a href="/#/gifts"><span class="sr-only">Gifts</span></a></li>
+      <li id="ico-rsvp"><a href="/#/rsvp"><span class="sr-only">R.S.V.P.</span></a></li>
       <li id="ico-travel"><a href="/#/travel"><span class="sr-only">Travel Info</span></a></li>
-      <li id="ico-contact"><a href="mailto:teamleahjames@gmail.com?subject=Yo Guys!"><span class="sr-only">Get In Touch</span></a></li>
+      <li id="ico-gifts"><a href="/#/gifts"><span class="sr-only">Gifts</span></a></li>
+      <li id="ico-contact"><a href="#contactFormModal" data-toggle="modal" data-target="#contactFormModal"><span class="sr-only">Get In Touch</span></a></li>
     </ul>
   </div>
 
   <div ng-view class="reveal-animation"></div>
+
+  <div class="modal fade" id="contactFormModal" role="dialog" aria-labelledby="contactUs" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" name="contactForm" ng-controller="ContactController" novalidate>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title">Contact Us</h3>
+        </div>
+        <div class="modal-body">
+          <p><em>Sorry, still working out a few kinks.</em></p>
+<!--           <div class="form-group">
+            <label for="contact_name">Your Name</label>
+            <input type="text" name="contact_name" class="form-control" ng-model="contact.name" ng-required="true" placeholder="Your Name" />
+          </div>
+          <div class="form-group">
+            <label for="contact_email">Your Email</label>
+            <input type="text" name="contact_email" class="form-control" ng-model="contact.email" ng-required="true" placeholder="Your Email" />
+          </div>
+          <div class="form-group">
+            <label for="contact_note">What's Up?</label>
+            <textarea name="contact_note" class="form-control" ng-model="contact.note" ng-required="true"></textarea>
+          </div>
+ -->        </div>
+        <div class="modal-footer">
+<!--           <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="send()">Send</button>
+          </div>
+          <p ng-show="message">{{ message }}</p> -->
+        </div>
+      </form><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
 </body>
 </html>

@@ -1,0 +1,94 @@
+html {
+  height: 100%;
+}
+body {
+  font: 15px/1.5em 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background: #9ebde3 url("/assets/images/320/topfade.png") 0 0 repeat-x;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lobster', cursive;
+}
+hr {
+  background: transparent url("/assets/images/horzrule.png") 50% 0 no-repeat;
+  height: 60px;
+  border: none;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: transparent;
+}
+.navbar {
+  background-color: #262262;
+  border-top: none;
+  /*border-bottom: 1px solid #fff;*/
+  /*border-bottom: 1px solid rgba(255, 255, 255, 0.5);*/
+  border-bottom: none;
+  height: 53px;
+}
+.navbar.affix-top,
+.navbar.affix,
+.navbar.bottom {
+  top: 0;
+}
+.navbar-brand {
+  background: transparent url("/assets/images/nav-names.png") 0 50% no-repeat;
+  width: 113px;
+  margin-left: 15px;
+}
+.navbar-collapse {
+  border-top: none;
+}
+.navbar-toggle {
+  margin-right: 0;
+}
+.icon-bar {
+  background-color: #fff;
+}
+.navbar-nav {
+  background-color: #262262;
+  margin-top: 0;
+}
+.navbar-header,
+.navbar-nav > li {
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+.navbar-header.active,
+.navbar-nav > li.active {
+  background-color: #626fa2;
+}
+.navbar-brand,
+.navbar-nav > li > a {
+  padding: 0;
+  height: 53px;
+}
+.navbar-brand:focus,
+.navbar-brand:hover,
+.navbar-nav > li > a:focus,
+.navbar-nav > li > a:hover {
+  border-bottom: 1px solid #fff;
+}
+
+#nav-bridalparty a { background: transparent url("/assets/images/nav-bridalparty.png") 0 50% no-repeat; width: 156px; }
+#nav-ceremony a    { background: transparent url("/assets/images/nav-ceremony.png")    0 50% no-repeat; width: 168px; }
+#nav-reception a   { background: transparent url("/assets/images/nav-reception.png")   0 50% no-repeat; width: 134px; }
+#nav-rsvp a        { background: transparent url("/assets/images/nav-rsvp.png")        0 50% no-repeat; width: 110px; }
+#nav-travel a      { background: transparent url("/assets/images/nav-travel.png")      0 50% no-repeat; width: 172px; }
+#nav-gifts a       { background: transparent url("/assets/images/nav-gifts.png")       0 50% no-repeat; width:  78px; }
+#nav-contact a     { background: transparent url("/assets/images/nav-contact.png")     0 50% no-repeat; width: 172px; }
+
+.reveal-animation.ng-enter {
+  -webkit-transition: 1s linear all; /* Safari/Chrome */
+  transition: 1s linear all; /* All other modern browsers and IE10+ */
+  opacity: 0;
+}
+.reveal-animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.done-true {
+  text-decoration: line-through;
+  color: grey;
+}

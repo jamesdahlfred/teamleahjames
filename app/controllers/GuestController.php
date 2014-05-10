@@ -1,6 +1,6 @@
 <?php
 
-class RsvpController extends BaseController {
+class GuestController extends BaseController {
 
 	/**
 	 * GET /resource
@@ -11,7 +11,16 @@ class RsvpController extends BaseController {
 	public function index()
 	{
 		if (Auth::check()) {
-			$results = DB::select('SELECT * FROM guests ORDER BY last_name, first_name');
+			$results = DB::select('SELECT * FROM guests ORDER BY list, invitation, guest');
+			if (count($results) > 0) {
+				foreach ($results as $i => $j) {
+					foreach ($j as $k => $val) {
+						if ((substr($val, 0, 1) == '{' && substr($val, -1, 1) == '}') || (substr($val, 0, 1) == '[' && substr($val, -1, 1) == ']')) {
+							$results[$i]->$k = json_decode($val);
+						}
+					}
+				}
+			}
 			return Response::json($results);
 		}
 	}
@@ -55,10 +64,11 @@ class RsvpController extends BaseController {
 			  appetizer
 			  note
         accomodations
+        invitation
         created_at
         updated_at
-			) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
-				$code,
+			) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
+				Input::get('code'),
 				Input::get('list'),
 				substr(Input::get('attending'),0,1),
 				substr(Input::get('attending'),1),
@@ -73,6 +83,7 @@ class RsvpController extends BaseController {
 				Input::get('appetizer'),
 				Input::get('note'),
 				Input::get('accomodations'),
+				Input::get('invitation'),
 				new DateTime,
 				new DateTime
 			));
@@ -87,9 +98,9 @@ class RsvpController extends BaseController {
 	 * @param  string  $code
 	 * @return Response
 	 */
-	public function show($code)
+	public function show($id)
 	{
-		$results = DB::select('SELECT code, CONCAT(attending, emotion) AS attending, allow_plusone, allow_children, guest, plusone, children, email, phone, address, appetizer, note FROM guests WHERE code = ?', array(mb_strtoupper($code)));
+		$results = DB::select('SELECT id, code, CONCAT(attending, emotion) AS attending, allow_plusone, allow_children, guest, plusone, children, email, phone, address, appetizer, note, accomodations, invitation FROM guests WHERE id = ?', array($id));
 		if (count($results) > 0) {
 			foreach ($results as $i => $j) {
 				foreach ($j as $k => $val) {
@@ -100,7 +111,7 @@ class RsvpController extends BaseController {
 			}
 			return Response::json($results);
 		} else {
-			return Response::json(array('text' => 'That code isn\'t valid. Try again?'), 500);
+			return Response::json(array('text' => 'That guest doesn\'t exist. Try again?'), 500);
 		}
 	}
 
@@ -113,7 +124,7 @@ class RsvpController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$results = DB::select('SELECT * FROM guests WHERE code = ?', array($id));
+		$results = DB::select('SELECT * FROM guests WHERE id = ?', array($id));
 		return Response::json($results);
 	}
 
@@ -124,10 +135,10 @@ class RsvpController extends BaseController {
 	 * @param  string  $code
 	 * @return Response
 	 */
-	public function update($code)
+	public function update($id)
 	{
-		DB::update('UPDATE guests SET responded = ?, attending = ?, emotion = ?, guest = ?, plusone = ?, children = ?, email = ?, address = ?, phone = ?, appetizer = ?, note = ?, updated_at = ? WHERE code = ?', array(
-			'1',
+		DB::update('UPDATE guests SET code = ?, attending = ?, emotion = ?, guest = ?, plusone = ?, children = ?, email = ?, address = ?, phone = ?, appetizer = ?, note = ?, invitation = ?, updated_at = ? WHERE id = ?', array(
+			Input::get('code'),
 			substr(Input::get('attending'),0,1),
 			substr(Input::get('attending'),1),
       json_encode(Input::get('guest')),
@@ -138,8 +149,9 @@ class RsvpController extends BaseController {
 			Input::get('phone'),
 			Input::get('appetizer'),
 			Input::get('note'),
+			Input::get('invitation'),
 			new DateTime,
-			$code
+			$id
 		));
 		return Response::json(array('text' => 'Response saved!'));
 	}
@@ -153,7 +165,7 @@ class RsvpController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		DB::delete('DELETE FROM guests WHERE code = ?', array($id));
+		DB::delete('DELETE FROM guests WHERE id = ?', array($id));
 		return Response::json();
 	}
 

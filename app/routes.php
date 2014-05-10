@@ -11,23 +11,54 @@
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Pages
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function()
 {
   return View::make('home');
 });
 
+Route::get('/admin', function()
+{
+  return View::make('admin');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Services
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/rsvp/{code}', 'RsvpController@show');
 Route::put('/rsvp/{code}', 'RsvpController@update');
+
+Route::get('/guests'     , 'GuestController@index');
+Route::get('/guests/{id}', 'GuestController@show');
+Route::put('/guests/{id}', 'GuestController@update');
 
 Route::post('/auth/login', array('before' => 'csrf_json', 'uses' => 'AuthController@login'));
 Route::get('/auth/logout', 'AuthController@logout');
 Route::get('/auth/status', 'AuthController@status');
-Route::get('/auth/secrets','AuthController@secrets');
 
-// Route::get('/guests', function()
-// {
-//   return View::make('guests');
-// });
+Route::post('/contact', function()
+{
+  $name = Input::get('name');
+  $email = Input::get('email');
+  $note = Input::get('note');
+  $timestamp = date('r');
+  $data = array('name' => $name, 'email' => $email, 'note' => $note, 'timestamp' => $timestamp); 
+
+  Mail::send('emails.contact', $data, function($message) use ($name, $email)
+  {   
+    $message->from($email, $name);
+    $message->to('teamleahjames@gmail.com', 'Team Leah-James')->subject('teamleahjames.com Contact Form');
+    return Response::json(array('text' => 'Thanks for your message, we\'ll get back to you soon!'));
+  });
+});
 
 // // Route::get('users', 'UserController@getIndex');
 // Route::get('/users', function()

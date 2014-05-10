@@ -9,15 +9,15 @@ class UsersTableSeeder extends Seeder {
     $users = array(
       array(
         'name'       => 'James',
-        'email'      => 'james.dahlfred@gmail.com',
-        'password'   => Hash::make('dishanddrink'),
+        'email'      => 'groom@teamleahjames.com',
+        'password'   => Hash::make('teamleahjames'),
         'created_at' => new DateTime,
         'updated_at' => new DateTime
         ),
       array(
         'name'       => 'Leah',
-        'email'      => 'leahburnett77@gmail.com',
-        'password'   => Hash::make('dishanddrink'),
+        'email'      => 'bride@teamleahjames.com',
+        'password'   => Hash::make('teamleahjames'),
         'created_at' => new DateTime,
         'updated_at' => new DateTime
         )

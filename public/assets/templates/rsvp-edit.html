@@ -22,7 +22,9 @@
 
     <div ng-show="rsvp.attending=='0joy' || rsvp.attending=='0regret'">
       <div class="form-group">
-        <input class="btn btn-small btn-primary" type="submit" value="Respond" ng-click="respond()" />
+        <input class="btn btn-small btn-primary" type="submit" value="Respond" ng-click="respond()" /> &nbsp;
+        <span class="text-success" ng-show="success">{{ success }}</span>
+        <span class="text-danger" ng-show="danger">{{ danger }}</span>
       </div>
     </div>
 
@@ -30,7 +32,7 @@
       <div class="row">
         <div class="col-md-7">
           <div class="form-group">
-            <h3>You</h3>
+            <h3><span class="glyphicon glyphicon-hand-right"></span> You</h3>
             <div class="row">
               <div class="col-xs-4">
                 <input type="text" name="guest_first" class="form-control" ng-model="rsvp.guest.first" ng-required="true" placeholder="First" />
@@ -72,7 +74,7 @@
           </div>
 
           <div ng-show="rsvp.allow_children=='1'">
-            <h3>Children</h3>
+            <h3><span class="glyphicon glyphicon-hand-right"></span> Children</h3>
             <div class="form-group">
               <div class="row">
                 <div class="col-xs-2">
@@ -88,7 +90,7 @@
           </div>
 
           <div class="form-group">
-            <h3>Appetizer</h3>
+            <h3><span class="glyphicon glyphicon-hand-right"></span> Appetizer</h3>
             <span class="help-block">Can you bring your favorite homemade family-style (or Trader Joe's freezer aisle) appetizer for the cocktail hour? There's no refrigeration or cooking available on-site, so we're talking to those of you who aren't travelling a great distance, or any enterprising souls with a kitchen in their hotel room.</span>
             <label class="checkbox-inline">
               <input type="radio" name="appetizer" value="1" ng-model="rsvp.appetizer" ng-required="true"> Yes &nbsp;
@@ -103,16 +105,16 @@
           <div class="form-group">
             <h3>Your Preferred Contact Information</h3>
             <span class="help-block">We need a reliable way to let you know if something big changes. Remember that wedding where it blizzarded and the governor closed all the roads and the wedding had to be put off a day? We don't expect snow in June, but who knows, this is New England.</span>
-            <label for="address">Mailing Address</label>
+            <label for="address"><span class="glyphicon glyphicon-hand-right"></span> Mailing Address</label>
             <textarea class="form-control" name="address" ng-model="rsvp.address" ng-required="true" rows="3">{{ rsvp.address }}</textarea>
             <div class="row">
               <div class="col-sm-6">
-                <label for="email">Email Address</label>
+                <label for="email"><span class="glyphicon glyphicon-hand-right"></span> Email Address</label>
                 <input type="email" class="form-control" ng-model="rsvp.email" ng-required="true" placeholder="Email" />
               </div>
               <div class="col-sm-6">
                 <label for="phone">Phone Number</label>
-                <input type="tel" class="form-control" ng-model="rsvp.phone" ng-required="true" placeholder="Phone" />
+                <input type="tel" class="form-control" ng-model="rsvp.phone" ng-required="false" placeholder="Phone" />
               </div>
             </div>
           </div>
@@ -133,7 +135,7 @@
         </div>
         <p>
           <br />
-          <input class="btn btn-small btn-primary" ng-disabled="rsvpForm.$invalid || isUnchanged(rsvpCode)" type="submit" value="Respond" ng-click="respond()" /> &nbsp;
+          <input class="btn btn-small btn-primary" ng-disabled="rsvpForm.$invalid" type="submit" value="Respond" ng-click="respond()" /> &nbsp; <!-- || isUnchanged(rsvpCode) -->
           <span class="text-success" ng-show="success">{{ success }}</span>
           <span class="text-danger" ng-show="danger">{{ danger }}</span>
         </p>
@@ -143,5 +145,5 @@
   </form>
 </div><!-- end: .container -->
 <div class="container wellfoot">
-  <p class="small text-center">Team Leah-James &copy; 2014 | <a href="/#/">The Short &amp; Sweet Version</a> | <a href="/#/bridalparty">Bridal Party</a> | <a href="/#/ceremony">Ceremony</span></a> |  <a href="/#/rsvp">R.S.V.P.</a> | <a href="/#/reception">Reception</a> | <a href="/#/gifts">Gifts</a> | <a href="/#/travel">Travel Info</a> | <a href="mailto:teamleahjames@gmail.com?subject=Yo Guys!">Get In Touch</a></p>
+  <p class="small text-center">Team Leah-James &copy; 2014 | <a href="/#/">The Short &amp; Sweet Version</a> | <a href="/#/bridalparty">Bridal Party</a> | <a href="/#/ceremony">Ceremony</span></a> | <a href="/#/rsvp">R.S.V.P.</a> | <a href="/#/reception">Reception</a> | <a href="/#/gifts">Gifts</a> | <a href="/#/travel">Travel Info</a> | <a href="#contactFormModal" data-toggle="modal" data-target="#contactFormModal">Get In Touch</a></p>
 </div>

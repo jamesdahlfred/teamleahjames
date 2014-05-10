@@ -1,0 +1,24 @@
+<div class="container welltop"></div>
+<div class="container well">
+  <h2>Login</h2>
+  <form name="loginForm" ng-controller="LoginController" novalidate ng-submit="login()">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" name="email" type="text" placeholder="email" ng-model="credentials.email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" name="password" type="password" placeholder="password" ng-model="credentials.password" required />
+        </div>
+        <div class="form-group">
+          <input class="btn btn-primary" ng-disabled="loginForm.$invalid" type="submit" value="Log In" ng-click="login()" />
+        </div>
+      </div>
+    </div>
+  </form>
+</div><!-- end: .container -->
+<div class="container wellfoot">
+  <p class="small text-center">Team Leah-James &copy; 2014 | <a href="/#/">The Short &amp; Sweet Version</a> | <a href="/#/bridalparty">Bridal Party</a> | <a href="/#/ceremony">Ceremony</span></a> | <a href="/#/rsvp">R.S.V.P.</a> | <a href="/#/reception">Reception</a> | <a href="/#/gifts">Gifts</a> | <a href="/#/travel">Travel Info</a> | <a href="#contactFormModal" data-toggle="modal" data-target="#contactFormModal">Get In Touch</a></p>
+</div>

@@ -1,31 +1,36 @@
-function TodoCtrl($scope) {
-  $scope.todos = [
-    {text:'learn angular', done:true},
-    {text:'build an angular app', done:false}];
- 
-  $scope.addTodo = function() {
-    $scope.todos.push({text:$scope.todoText, done:false});
-    $scope.todoText = '';
-  };
- 
-  $scope.remaining = function() {
-    var count = 0;
-    angular.forEach($scope.todos, function(todo) {
-      count += todo.done ? 0 : 1;
-    });
-    return count;
-  };
- 
-  $scope.archive = function() {
-    var oldTodos = $scope.todos;
-    $scope.todos = [];
-    angular.forEach(oldTodos, function(todo) {
-      if (!todo.done) $scope.todos.push(todo);
-    });
-  };
-}
+// $('body').on($.support.transition, '.reveal-animation', function(event){    
+//     debugger;
+//     $('#totals').affix({ offset: { top: 250 } });
+// });
 
-var app = angular.module("app", ['ngSanitize']);
+var app = angular.module('app', ['ngSanitize', 'ngRoute', 'ngAnimate', 'ngCookies']);
+
+app.config(function($routeProvider) {
+  $routeProvider
+    .when('/login', {
+      templateUrl: '/assets/templates/login.html',
+      controller: 'LoginController'
+    })
+    .when('/guests', {
+      templateUrl: '/assets/templates/guests.html',
+      controller: 'GuestsController',
+      resolve: {
+        guests: function(GuestsService) {
+          return GuestsService.get();
+        }
+      }
+    })
+    .when('/guest/:id', {
+      templateUrl: '/assets/templates/guest.html',
+      controller: 'GuestController',
+      resolve: {
+        guest: function(GuestService) {
+          return GuestService.get(id);
+        }
+      }
+    })
+    .otherwise({ redirectTo: '/login' });
+});
 
 app.config(function($httpProvider) {
 
@@ -52,79 +57,54 @@ app.config(function($httpProvider) {
 
 });
 
-app.config(function($routeProvider) {
-
-  $routeProvider.when('/login', {
-    templateUrl: 'templates/login.html',
-    controller: 'LoginController'
-  });
-
-  $routeProvider.when('/home', {
-    templateUrl: 'templates/home.html',
-    controller: 'HomeController'
-  });
-
-  $routeProvider.when('/books', {
-    templateUrl: 'templates/books.html',
-    controller: 'BooksController',
-    resolve: {
-      books : function(BookService) {
-        return BookService.get();
-      }
-    }
-  });
-
-  $routeProvider.otherwise({ redirectTo: '/login' });
-
-});
-
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {
-  var routesThatRequireAuth = ['/home'];
+  var routesThatRequireAuth = ['/guests', '/guest/:id'];
 
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
     if(_(routesThatRequireAuth).contains($location.path()) && !AuthenticationService.isLoggedIn()) {
       $location.path('/login');
       FlashService.show("Please log in to continue.");
     }
+    $('.navbar-brand, .navbar a').each(function(i, el) {
+      var fragment = $(el).attr('href');
+      if (location.href.substr(location.href.indexOf(fragment)) == fragment) {
+        $(el).parent().addClass('active');
+      } else {
+        $(el).parent().removeClass('active');
+      }
+    });
   });
 });
 
-app.factory("BookService", function($http) {
-  return {
-    get: function() {
-      return $http.get('/books');
-    }
-  };
-});
-
-app.factory("FlashService", function($rootScope) {
-  return {
-    show: function(message) {
-      $rootScope.flash = message;
-    },
-    clear: function() {
-      $rootScope.flash = "";
-    }
-  }
-});
-
-app.factory("SessionService", function() {
+app.factory("SessionService", function($cookieStore) {
   return {
     get: function(key) {
-      return sessionStorage.getItem(key);
+      if (Modernizr.sessionStorage) {
+        return sessionStorage.getItem(key);
+      } else {
+        return $cookieStore.get(key);
+      }
     },
     set: function(key, val) {
-      return sessionStorage.setItem(key, val);
+      if (Modernizr.sessionStorage) {
+         return sessionStorage.setItem(key, val);
+      } else {
+        return $cookieStore.put(key, val);
+      }
     },
     unset: function(key) {
-      return sessionStorage.removeItem(key);
+      if (Modernizr.sessionStorage) {
+        return sessionStorage.removeItem(key);
+      } else {
+        return $cookieStore.remove(key);
+      }
     }
   }
 });
 
 app.factory("AuthenticationService", function($http, $sanitize, SessionService, FlashService, CSRF_TOKEN) {
 
-  var cacheSession   = function() {
+  var cacheSession = function() {
     SessionService.set('authenticated', true);
   };
 
@@ -163,23 +143,82 @@ app.factory("AuthenticationService", function($http, $sanitize, SessionService, 
   };
 });
 
+app.factory("GuestsService", function($http) {
+  return {
+    get: function() {
+      return $http.get('/guests');
+    }
+  };
+});
+
+app.factory("GuestService", function($http) {
+  return {
+    get: function(id) {
+      return $http.get('/guests/' + id);
+    },
+    set: function(id, data) {
+      return $http.put('/guests/' + id, data);
+    }
+  };
+});
+
+app.factory("FlashService", function($rootScope) {
+  return {
+    show: function(message) {
+      $rootScope.flash = message;
+    },
+    clear: function() {
+      $rootScope.flash = "";
+    }
+  }
+});
+
 app.controller("LoginController", function($scope, $location, AuthenticationService) {
   $scope.credentials = { email: "", password: "" };
 
   $scope.login = function() {
     AuthenticationService.login($scope.credentials).success(function() {
-      $location.path('/home');
+      $location.path('/guests');
     });
   };
 });
 
-app.controller("BooksController", function($scope, books) {
-  $scope.books = books.data;
-});
+app.controller("GuestsController", function($scope, $location, AuthenticationService, guests) {
+  $scope.guestsA = _.where(guests.data, {list: 'A'});
+  $scope.guestsB = _.where(guests.data, {list: 'B'});
+  $scope.guestsC = _.where(guests.data, {list: 'C'});
 
-app.controller("HomeController", function($scope, $location, AuthenticationService) {
-  $scope.title = "Awesome Home";
-  $scope.message = "Mouse Over these images to see a directive at work!";
+  $scope.totalAccepted = 0;
+  $scope.totalDeclined = 0;
+  $scope.totalSent = 0;
+
+  $scope.totalApps = 0;
+  $scope.totalAdults = 0;
+  $scope.totalChildren = 0;
+  $scope.totalClams = 0;
+  $scope.totalVegs = 0;
+
+  _.each(guests.data, function(guest){
+    $scope.totalSent     += (guest.invitation_sent == '1' ? 1 : 0);
+    $scope.totalAccepted += (guest.invitation_sent == '1' && guest.responded == '1' && guest.attending == '1' ? 1 : 0);
+    $scope.totalDeclined += (guest.invitation_sent == '1' && guest.responded == '1' && guest.attending == '0' ? 1 : 0);
+
+    guest.pending = (guest.invitation_sent == '1' && guest.responded == '0') ? true : false;
+    guest.inivitaion_number = (guest.invitation_sent) ? $scope.totalSent : 'N/A';
+
+    guest.adults   = 0;
+    guest.adults  += (guest.attending == '1' ? 1 : 0);
+    guest.adults  += (guest.attending == '1' && _.isObject(guest.plusone) ? 1 : 0);
+    guest.children = guest.children || '';
+
+    $scope.totalAdults   += guest.adults;
+    $scope.totalApps     += (guest.responded == '1' && guest.attending == '1' && guest.appetizer == 1 ? 1 : 0);
+    $scope.totalClams    += (guest.responded == '1' && guest.attending == '1' && guest.guest.meal == 'S' ? 1 : 0);
+    $scope.totalClams    += (guest.responded == '1' && guest.attending == '1' && _.isObject(guest.plusone) && guest.plusone.meal == 'S' ? 1 : 0);
+    $scope.totalVegs     += (guest.responded == '1' && guest.attending == '1' && guest.guest.meal == 'V' ? 1 : 0);
+    $scope.totalVegs     += (guest.responded == '1' && guest.attending == '1' && _.isObject(guest.plusone) && guest.plusone.meal == 'V' ? 1 : 0);
+    $scope.totalChildren += (guest.responded == '1' && guest.attending == '1' && guest.children ? guest.children : 0);
+  });
 
   $scope.logout = function() {
     AuthenticationService.logout().success(function() {
@@ -188,19 +227,62 @@ app.controller("HomeController", function($scope, $location, AuthenticationServi
   };
 });
 
-app.directive("showsMessageWhenHovered", function() {
+app.controller("GuestController", function($scope, $location, AuthenticationService, guest) {
+  $scope.guest = guest.data;
+
+  $scope.logout = function() {
+    AuthenticationService.logout().success(function() {
+      $location.path('/login');
+    });
+  };
+});
+
+app.factory("ContactService", function($http) {
   return {
-    restrict: "A", // A = Attribute, C = CSS Class, E = HTML Element, M = HTML Comment
-    link: function(scope, element, attributes) {
-      var originalMessage = scope.message;
-      element.bind("mouseenter", function() {
-        scope.message = attributes.message;
-        scope.$apply();
-      });
-      element.bind("mouseleave", function() {
-        scope.message = originalMessage;
-        scope.$apply();
-      });
+    send: function(data) {
+      return $http.post('/contact', data);
     }
   };
 });
+
+app.controller("ContactController", function($scope, ContactService) {
+  $scope.contact = { name: "", email: "", note: "" };
+  $scope.message = "";
+  
+  $scope.send = function() {
+    ContactService.send($scope.contact)
+      .success(function(response) {
+        $scope.message = response.text;
+      })
+      .error(function(response) {
+        $scope.message = response.text;
+      });
+  }
+});
+
+// function TodoCtrl($scope) {
+//   $scope.todos = [
+//     {text:'learn angular', done:true},
+//     {text:'build an angular app', done:false}];
+ 
+//   $scope.addTodo = function() {
+//     $scope.todos.push({text:$scope.todoText, done:false});
+//     $scope.todoText = '';
+//   };
+ 
+//   $scope.remaining = function() {
+//     var count = 0;
+//     angular.forEach($scope.todos, function(todo) {
+//       count += todo.done ? 0 : 1;
+//     });
+//     return count;
+//   };
+ 
+//   $scope.archive = function() {
+//     var oldTodos = $scope.todos;
+//     $scope.todos = [];
+//     angular.forEach(oldTodos, function(todo) {
+//       if (!todo.done) $scope.todos.push(todo);
+//     });
+//   };
+// }

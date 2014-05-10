@@ -1,0 +1,190 @@
+<div class="container welltop"></div>
+<div class="container well">
+  <h2>Guest List</h2>
+  <div class="row">
+    <div class="col-md-5">
+      <h4>Invitations</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Sent</th>
+            <th>Accepted</th>
+            <th>Declined</th>
+            <th>Pending</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ totalSent }}</td>
+            <td>{{ totalAccepted }}</td>
+            <td class="text-muted">{{ totalDeclined }}</td>
+            <td class="pending">{{ totalSent - (totalAccepted + totalDeclined) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <h4>People &amp; Meals</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><span class="glyphicon glyphicon-cutlery" alt="Meal"></span> Adult Meals</th>
+            <th><span class="glyphicon glyphicon-cutlery" alt="Meal"></span> Child Meals</th>
+            <th><span class="glyphicon glyphicon-glass" alt="Cocktail Glass"></span> Appetizers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ totalAdults }} (<span class="glyphicon glyphicon-fire" alt="Clambake Fare"></span> {{ totalClams }} Clambake, <span class="veggie"><span class="glyphicon glyphicon-leaf" alt="Vegetarian"></span> {{ totalVegs }} Vegetarians)</span></td>
+            <td>{{ totalChildren }}</td>
+            <td>{{ totalApps }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>    
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="9"><h3>A List</h3></th>
+      </tr>
+      <tr>
+        <th rowspan="2"><span class="glyphicon glyphicon-inbox" alt="Invitation Mailed?"></span></th>
+        <th rowspan="2">Code</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-cutlery" alt="Meal"></span></th>
+        <th rowspan="2">Guest Name</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-cutlery" alt="Meal"></span></th>
+        <th rowspan="2">Plus One</th>
+        <th rowspan="2">App</th>
+        <th rowspan="2">Email</th>
+        <th rowspan="2">Response</th>
+        <th colspan="2">Attending</th>
+        <th colspan="2">Accomodations</th>
+      </tr>
+      <tr>
+        <th>Adults</th>
+        <th>Children</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="guest in guestsA">
+      <tr class="{{ guest.responded && !guest.attending ? 'text-muted' : '' }} {{ guest.pending ? 'pending' : '' }}">
+        <td style="white-space:nowrap"><span class="{{ guest.invitation_sent ? 'glyphicon glyphicon-ok' : '' }}" alt="Invitation Mailed?"></span>&nbsp;{{ guest.inivitaion_number }}</td>
+        <td>{{ guest.code }}</td>
+        <td class="{{ guest.guest.meal == 'V' ? 'veggie' : '' }}">
+          <span class="{{ guest.guest.meal == 'V' ? 'glyphicon glyphicon-leaf' : '' }}" alt="Vegetarian"></span>
+          <span class="{{ guest.guest.meal == 'S' ? 'glyphicon glyphicon-fire' : '' }}" alt="Clambake Fare"></span>
+        </td>
+        <td class="{{ guest.guest.meal == 'V' ? 'veggie' : '' }}">{{ guest.guest.first }} {{ guest.guest.last }}</td>
+        <td class="{{ guest.plusone.meal == 'V' ? 'veggie' : '' }}">
+          <span class="{{ guest.plusone.meal == 'V' ? 'glyphicon glyphicon-leaf' : '' }}" alt="Vegetarian"></span>
+          <span class="{{ guest.plusone.meal == 'S' ? 'glyphicon glyphicon-fire' : '' }}" alt="Clambake Fare"></span>
+        </td>
+        <td class="{{ guest.plusone.meal == 'V' ? 'veggie' : '' }}">{{ guest.plusone.first }} {{ guest.plusone.last }}</td>
+        <td><span class="{{ guest.responded && guest.appetizer ? 'glyphicon glyphicon-glass' : '' }}"></span></td>
+        <td><a href="mailto:{{ guest.email }}" title="{{ guest.email }}"><span class="{{ guest.email ? 'glyphicon glyphicon-envelope' : '' }}" alt="Email"></span></a></td>
+        <td>{{ guest.responded ? (guest.attending ? 'Yes' : 'No') : '' }}{{ guest.responded ? ', with ' + guest.emotion : '' }}</td>
+        <td>{{ guest.responded && guest.attending ? guest.adults : '' }}</td>
+        <td>{{ guest.responded && guest.attending ? guest.children : '' }}</td>
+        <td>{{ guest.accomodations.sat }}</td>
+        <td>{{ guest.accomodations.sun }}</td>
+      </tr>
+      <tr class="{{ guest.responded && !guest.attending ? 'text-muted' : '' }}" ng-show="guest.note">
+        <td colspan="3">&nbsp;</td>
+        <td colspan="10"><em>{{ guest.note }}</em></td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th colspan="9"><h3>B List</h3></th>
+      </tr>
+      <tr>
+        <th rowspan="2"><span class="glyphicon glyphicon-inbox" alt="Invitation Mailed?"></span></th>
+        <th rowspan="2">Code</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-cutlery" alt="Meal"></span></th>
+        <th rowspan="2">Guest Name</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-cutlery" alt="Meal"></span></th>
+        <th rowspan="2">Plus One</th>
+        <th rowspan="2">App</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-envelope" alt="Email Address"></span></th>
+        <th rowspan="2">Response</th>
+        <th colspan="2">Attending</th>
+        <th colspan="2">Accomodations</th>
+      </tr>
+      <tr>
+        <th>Adults</th>
+        <th>Children</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="guest in guestsB">
+      <tr class="{{ guest.responded && !guest.attending ? 'text-muted' : '' }} {{ guest.pending ? 'pending' : '' }}">
+        <td style="white-space:nowrap"><span class="{{ guest.invitation_sent ? 'glyphicon glyphicon-ok' : '' }}" alt="Invitation Mailed?"></span>&nbsp;{{ guest.inivitaion_number }}</td>
+        <td>{{ guest.code }}</td>
+        <td class="{{ guest.guest.meal == 'V' ? 'veggie' : '' }}">
+          <span class="{{ guest.guest.meal == 'V' ? 'glyphicon glyphicon-leaf' : '' }}" alt="Vegetarian"></span>
+          <span class="{{ guest.guest.meal == 'S' ? 'glyphicon glyphicon-fire' : '' }}" alt="Clambake Fare"></span>
+        </td>
+        <td class="{{ guest.guest.meal == 'V' ? 'veggie' : '' }}">{{ guest.guest.first }} {{ guest.guest.last }}</td>
+        <td class="{{ guest.plusone.meal == 'V' ? 'veggie' : '' }}">
+          <span class="{{ guest.plusone.meal == 'V' ? 'glyphicon glyphicon-leaf' : '' }}" alt="Vegetarian"></span>
+          <span class="{{ guest.plusone.meal == 'S' ? 'glyphicon glyphicon-fire' : '' }}" alt="Clambake Fare"></span>
+        </td>
+        <td class="{{ guest.plusone.meal == 'V' ? 'veggie' : '' }}">{{ guest.plusone.first }} {{ guest.plusone.last }}</td>
+        <td><span class="{{ guest.responded && guest.appetizer ? 'glyphicon glyphicon-glass' : '' }}"></span></td>
+        <td><a href="mailto:{{ guest.email }}" title="{{ guest.email }}"><span class="{{ guest.email ? 'glyphicon glyphicon-envelope' : '' }}" alt="Email"></span></a></td>
+        <td>{{ guest.responded ? (guest.attending ? 'Yes' : 'No') : '' }}{{ guest.responded ? ', with ' + guest.emotion : '' }}</td>
+        <td>{{ guest.responded && guest.attending ? guest.adults : '' }}</td>
+        <td>{{ guest.responded && guest.attending ? guest.children : '' }}</td>
+        <td>{{ guest.accomodations.sat }}</td>
+        <td>{{ guest.accomodations.sun }}</td>
+      </tr>
+      <tr class="{{ guest.responded && !guest.attending ? 'text-muted' : '' }}" ng-show="guest.note">
+        <td colspan="3">&nbsp;</td>
+        <td colspan="10"><em>{{ guest.note }}</em></td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th colspan="13"><h3>Other People</h3></th>
+      </tr>
+      <tr>
+        <th rowspan="2"><span class="glyphicon glyphicon-inbox" alt="Invitation Mailed?"></span></th>
+        <th rowspan="2">Code</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-cutlery" alt="Meal"></span></th>
+        <th rowspan="2">Guest Name</th>
+        <th rowspan="2"><span class="glyphicon glyphicon-cutlery" alt="Meal"></span></th>
+        <th rowspan="2">Plus One</th>
+        <th rowspan="2">App</th>
+        <th rowspan="2">Email</th>
+        <th rowspan="2">Response</th>
+        <th colspan="4">Adults</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="guest in guestsC">
+      <tr>
+        <td class="text-muted">N/A</td>
+        <td>{{ guest.code }}</td>
+        <td class="{{ guest.guest.meal == 'V' ? 'veggie' : '' }}">
+          <span class="{{ guest.guest.meal == 'V' ? 'glyphicon glyphicon-leaf' : '' }}" alt="Vegetarian"></span>
+          <span class="{{ guest.guest.meal == 'S' ? 'glyphicon glyphicon-fire' : '' }}" alt="Clambake Fare"></span>
+        </td>
+        <td class="{{ guest.guest.meal == 'V' ? 'veggie' : '' }}">{{ guest.guest.first }} {{ guest.guest.last }}</td>
+        <td class="{{ guest.plusone.meal == 'V' ? 'veggie' : '' }}">
+          <span class="{{ guest.plusone.meal == 'V' ? 'glyphicon glyphicon-leaf' : '' }}" alt="Vegetarian"></span>
+          <span class="{{ guest.plusone.meal == 'S' ? 'glyphicon glyphicon-fire' : '' }}" alt="Clambake Fare"></span>
+        </td>
+        <td class="{{ guest.plusone.meal == 'V' ? 'veggie' : '' }}">{{ guest.plusone.first }} {{ guest.plusone.last }}</td>
+        <td class="text-muted">N/A</td>
+        <td><a href="mailto:{{ guest.email }}" title="{{ guest.email }}"><span class="{{ guest.email ? 'glyphicon glyphicon-envelope' : '' }}" alt="Email"></span></a></td>
+        <td>Yes</td>
+        <td colspan="4">{{ guest.responded && guest.attending ? guest.adults : '' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- end: .container -->
+<div class="container wellfoot">
+  <p class="small text-center">Team Leah-James &copy; 2014 | <a href="/#/">The Short &amp; Sweet Version</a> | <a href="/#/bridalparty">Bridal Party</a> | <a href="/#/ceremony">Ceremony</span></a> | <a href="/#/rsvp">R.S.V.P.</a> | <a href="/#/reception">Reception</a> | <a href="/#/gifts">Gifts</a> | <a href="/#/travel">Travel Info</a> | <a href="#contactFormModal" data-toggle="modal" data-target="#contactFormModal">Get In Touch</a></p>
+</div>

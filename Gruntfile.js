@@ -12,10 +12,11 @@ module.exports = function(grunt) {
       options: {
         separator: ';\n'
       },
-      dev_frontend: {
+      frontend: {
         src: [
           './bower_components/modernizr/modernizr.js',
           './bower_components/jquery/dist/jquery.js',
+          './bower_components/underscore/underscore.js',
           './bower_components/bootstrap/dist/js/bootstrap.js',
           './bower_components/angular/angular.js',
           './bower_components/angular-route/angular-route.js',
@@ -28,10 +29,11 @@ module.exports = function(grunt) {
         ],
         dest: './public/assets/js/frontend.js'
       },
-      dev_backend: {
+      backend: {
         src: [
           './bower_components/modernizr/modernizr.js',
           './bower_components/jquery/dist/jquery.js',
+          './bower_components/underscore/underscore.js',
           './bower_components/bootstrap/dist/js/bootstrap.js',
           './bower_components/angular/angular.js',
           './bower_components/angular-route/angular-route.js',
@@ -40,48 +42,20 @@ module.exports = function(grunt) {
           './bower_components/angular-cookies/angular-cookies.js',
           './bower_components/angular-touch/angular-touch.js',
           './bower_components/angular-sanitize/angular-sanitize.js',
-          './app/assets/js/backend.js'
-        ],
-        dest: './public/assets/js/backend.js'
-      },
-      pro_frontend: {
-        src: [
-          './bower_components/modernizr/modernizr.js',
-          './bower_components/jquery/dist/jquery.min.js',
-          // './bower_components/backbone/backbone.js',
-          './bower_components/bootstrap/dist/js/bootstrap.min.js',
-          './bower_components/angular/angular.min.js',
-          './bower_components/angular-route/angular-route.min.js',
-          './bower_components/angular-resource/angular-resource.min.js',
-          './bower_components/angular-animate/angular-animate.min.js',
-          './bower_components/angular-cookies/angular-cookies.min.js',
-          './bower_components/angular-touch/angular-touch.min.js',
-          './bower_components/angular-sanitize/angular-sanitize.min.js',
-          // './bower_components/markdown/lib/markdown.js',
-          './app/assets/js/frontend.js'
-        ],
-        dest: './public/assets/js/frontend.js'
-      },
-      pro_backend: {
-        src: [
-          './bower_components/modernizr/modernizr.js',
-          './bower_components/jquery/dist/jquery.min.js',
-          // './bower_components/backbone/backbone.js',
-          './bower_components/bootstrap/dist/js/bootstrap.min.js',
-          './bower_components/angular/angular.min.js',
-          './bower_components/angular-route/angular-route.min.js',
-          './bower_components/angular-resource/angular-resource.min.js',
-          './bower_components/angular-animate/angular-animate.min.js',
-          './bower_components/angular-cookies/angular-cookies.min.js',
-          './bower_components/angular-touch/angular-touch.min.js',
-          './bower_components/angular-sanitize/angular-sanitize.min.js',
-          // './bower_components/markdown/lib/markdown.js',
           './app/assets/js/backend.js'
         ],
         dest: './public/assets/js/backend.js'
       }
     },
     copy: {
+      ico: {
+        expand: true,
+        cwd: './app/assets/ico/',
+        src: '**',
+        dest: './public/assets/ico/',
+        flatten: true,
+        filter: 'isFile'
+      },
       fonts: {
         expand: true,
         cwd: './bower_components/bootstrap/dist/fonts/',
@@ -160,7 +134,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['./app/assets/js/frontend.js', './app/assets/js/backend.js'],
-        tasks: ['concat:dev_frontend', 'concat:dev_backend'],
+        tasks: ['concat:frontend', 'concat:backend'],
         options: {
           livereload: true
         }
@@ -190,7 +164,7 @@ module.exports = function(grunt) {
         files: ['app/controllers/*.php', 'app/models/*.php'],
         tasks: ['phpunit']
       }
-    }
+    } // end watch
 
   });
 
@@ -199,12 +173,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-phpunit');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-phpunit');
 
   // Task definition
-  grunt.registerTask('build', ['concat:dev_frontend', 'concat:dev_backend', 'less:dev', 'copy']);
-  grunt.registerTask('build-prod', ['concat:pro_frontend', 'concat:pro_backend', 'uglify', 'less:pro', 'copy']);
+  grunt.registerTask('build', ['concat:frontend', 'concat:backend', 'less:dev', 'copy']);
+  grunt.registerTask('build-prod', ['concat:frontend', 'concat:backend', 'uglify', 'less:pro', 'copy']);
   grunt.registerTask('default', ['watch']);
-
 };
