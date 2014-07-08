@@ -199,25 +199,92 @@ app.controller("GuestsController", function($scope, $location, AuthenticationSer
   $scope.totalVegs = 0;
 
   _.each(guests.data, function(guest){
-    $scope.totalSent     += (guest.invitation_sent == '1' ? 1 : 0);
-    $scope.totalAccepted += (guest.invitation_sent == '1' && guest.responded == '1' && guest.attending == '1' ? 1 : 0);
-    $scope.totalDeclined += (guest.invitation_sent == '1' && guest.responded == '1' && guest.attending == '0' ? 1 : 0);
+    guest.adults = 0;
+    guest.pending = false;
 
-    guest.pending = (guest.invitation_sent == '1' && guest.responded == '0') ? true : false;
-    guest.inivitaion_number = (guest.invitation_sent) ? $scope.totalSent : 'N/A';
+    if (guest.invitation_sent == '1') {
 
-    guest.adults   = 0;
-    guest.adults  += (guest.attending == '1' ? 1 : 0);
-    guest.adults  += (guest.attending == '1' && _.isObject(guest.plusone) ? 1 : 0);
-    guest.children = guest.children || '';
+      // People we actually sent a paper invitation
+      $scope.totalSent += 1;
+      guest.inivitaion_number = (guest.invitation_sent) ? $scope.totalSent : '';
 
-    $scope.totalAdults   += guest.adults;
-    $scope.totalApps     += (guest.responded == '1' && guest.attending == '1' && guest.appetizer == 1 ? 1 : 0);
-    $scope.totalClams    += (guest.responded == '1' && guest.attending == '1' && guest.guest.meal == 'S' ? 1 : 0);
-    $scope.totalClams    += (guest.responded == '1' && guest.attending == '1' && _.isObject(guest.plusone) && guest.plusone.meal == 'S' ? 1 : 0);
-    $scope.totalVegs     += (guest.responded == '1' && guest.attending == '1' && guest.guest.meal == 'V' ? 1 : 0);
-    $scope.totalVegs     += (guest.responded == '1' && guest.attending == '1' && _.isObject(guest.plusone) && guest.plusone.meal == 'V' ? 1 : 0);
-    $scope.totalChildren += (guest.responded == '1' && guest.attending == '1' && guest.children ? guest.children : 0);
+      if (guest.responded == '1') {
+
+        // They're coming! Assess their stats.
+        if (guest.attending == '1') {
+          $scope.totalAccepted++;
+          $scope.totalAdults++;
+          guest.adults = 1;          
+
+          // Tick one in either column
+          $scope.totalClams += (guest.guest.meal == 'S') ? 1 : 0;
+          $scope.totalVegs  += (guest.guest.meal == 'V') ? 1 : 0;
+
+          if (_.isObject(guest.plusone)) {
+            $scope.totalAdults++;
+            guest.adults++;
+
+            // Tick one in either column
+            $scope.totalClams += (guest.plusone.meal == 'S') ? 1 : 0;
+            $scope.totalVegs  += (guest.plusone.meal == 'V') ? 1 : 0;
+          }
+          
+          // Appetizer?
+          $scope.totalApps += (guest.appetizer) ? 1 : 0;
+          
+          if (guest.children && guest.children > 0) {
+            $scope.totalChildren += guest.children;
+          } else {
+            guest.children = '';
+          }
+        } else {
+
+          // They're not coming.
+          $scope.totalDeclined++;
+        }
+      } else {
+
+        // They haven't responded.
+        guest.pending = true;
+      }
+
+    } else {
+      if (guest.responded == '1') {
+
+        // People we directly added without an invite
+        if (guest.attending == '1') {
+          $scope.totalAdults++;
+          guest.adults = 1;
+
+          // Tick one in either column
+          $scope.totalClams += (guest.guest.meal == 'S') ? 1 : 0;
+          $scope.totalVegs  += (guest.guest.meal == 'V') ? 1 : 0;
+
+          if (_.isObject(guest.plusone)) {
+            $scope.totalAdults++;
+            guest.adults++;
+
+            // Tick one in either column
+            $scope.totalClams += (guest.plusone.meal == 'S') ? 1 : 0;
+            $scope.totalVegs  += (guest.plusone.meal == 'V') ? 1 : 0;
+          }
+          
+          // Appetizer?
+          $scope.totalApps += (guest.appetizer) ? 1 : 0;
+          
+          if (guest.children && guest.children > 0) {
+            $scope.totalChildren += guest.children;
+          } else {
+            guest.children = '';
+          }
+        }
+      } else {
+
+        // Not invited at all, don't worry about them
+      }
+
+
+    }
   });
 
   $scope.logout = function() {
