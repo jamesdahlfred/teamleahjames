@@ -7,3 +7,13 @@ composer.lock
 .DS_Store
 Thumbs.db
 app/database/mysql.teamleahjames.com-teamleahjames--5-11-14
+teamleahjames.iml
+.idea/.name
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/copyright/profiles_settings.xml
+.idea/scopes/scope_settings.xml
